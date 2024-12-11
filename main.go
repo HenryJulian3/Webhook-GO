@@ -23,7 +23,7 @@ type HelloWorldResponse struct {
 // @Router /webhook [post]
 func WebhookHandler(w http.ResponseWriter, r *http.Request) {
 	response := HelloWorldResponse{
-		Message: "Hola Mundo",
+		Message: "Hola Mundo con GO",
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
@@ -39,6 +39,12 @@ func main() {
 	// Agregar ruta de Swagger
 	router.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 
+	// Mensaje de inicio
+	println("Servidor escuchando en http://localhost:8080")
+
 	// Iniciar servidor
-	http.ListenAndServe(":8080", router)
+	err := http.ListenAndServe(":8080", router)
+	if err != nil {
+		println("Error al iniciar el servidor:", err)
+	}
 }

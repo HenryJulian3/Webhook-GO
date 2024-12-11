@@ -1,0 +1,23 @@
+definitions:
+  main.HelloWorldResponse:
+    properties:
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /webhook:
+    post:
+      consumes:
+      - application/json
+      description: Este webhook responde con un mensaje de "Hola Mundo"
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.HelloWorldResponse'
+      summary: Webhook Hola Mundo
+swagger: "2.0"
